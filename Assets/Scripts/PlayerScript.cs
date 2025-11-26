@@ -4,53 +4,89 @@ using TMPro;
 
 public class PlayerScript : MonoBehaviour
 {
+    [Header("Movement")]
+    public float JumpForce = 12f;
 
-    public float JumpForce;
-    float score;
+    [Header("Score")]
     public TMP_Text ScoreTxt;
+    public float scoreMultiplier = 4f;
 
-    [SerializeField]
+    private float score = 0f;
+    private float nextScoreUpdate = 0f;
+
     bool isGrounded = false;
     bool isAlive = true; 
 
-    Rigidbody2D RB;
+    Rigidbody2D rb;
 
     private void Awake()
     {
-        RB = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
-    void Update()
+    private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+
+        if (!isAlive)
+            return;
+
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
-            if (isGrounded == true)
-            {
-                RB.AddForce(Vector2.up * JumpForce);
-                isGrounded = false;
-            }
+                JumpRequested = true;
         }
 
-        if(isAlive)
+        score += Time.deltaTime * scoreMultiplier;
+        if (Time.time >= nextScoreUpdate)
         {
-            score += Time.deltaTime * 4;
-            ScoreTxt.text = "SCORE : " + score.ToString("F");
+            ScoreTxt.text = $"SCORE : {score:F0}";
+            nextScoreUpdate = Time.time + 0.1f;
         }
     }
+
+    private bool JumpRequested = false;
+
+    private void FixedUpdate()
+    {
+        if (JumpRequested)
+        {
+            JumpRequested = false;
+
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0f);
+            rb.AddForce(Vector2.up * JumpForce, ForceMode2D.Impulse);
+
+            isGrounded = false;
+        }
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.CompareTag("ground"))
+        if (!isAlive)
+            return;
+
+        if (collision.gameObject.CompareTag("ground"))
         {
-            if(isGrounded == false)
+            foreach (var contact in collision.contacts)
             {
-                isGrounded = true;
+                if (contact.normal.y > 0.5f)
+                {
+                    isGrounded = true;
+                    break;
+                }
             }
         }
 
         if (collision.gameObject.CompareTag("spike"))
         {
-            isAlive = false;
-            Time.timeScale = 0;
+            Die();
         }
+    }
+
+    private void Die()
+    {
+        isAlive = false;
+        rb.linearVelocity = Vector2.zero;
+        rb.bodyType = RigidbodyType2D.Kinematic;
+
+        Time.timeScale = 0f;
     }
 }
