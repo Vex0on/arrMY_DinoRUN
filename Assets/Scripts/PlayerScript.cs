@@ -30,7 +30,7 @@ public class PlayerScript : MonoBehaviour
         if (!isAlive)
             return;
 
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow)) && isGrounded)
         {
                 JumpRequested = true;
         }
@@ -88,5 +88,7 @@ public class PlayerScript : MonoBehaviour
         rb.bodyType = RigidbodyType2D.Kinematic;
 
         Time.timeScale = 0f;
+
+        MainMenu.Instance?.ShowTryAgain();
     }
 }

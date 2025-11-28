@@ -9,7 +9,7 @@ public class SpikeGenerator : MonoBehaviour
     public float MinSpeed = 5f;
     public float MaxSpeed = 18f;
     public float currentSpeed;
-    public float SpeedMultiplier = 0.05f;
+    public float SpeedMultiplier = 0.15f;
 
     [Header("Spacing")]
     public float MinGap = 0.8f;
