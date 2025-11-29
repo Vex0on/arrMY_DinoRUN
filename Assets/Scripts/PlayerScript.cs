@@ -30,7 +30,7 @@ public class PlayerScript : MonoBehaviour
         if (!isAlive)
             return;
 
-        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow)) && isGrounded)
+        if ((Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.UpArrow)) && isGrounded)
         {
                 JumpRequested = true;
         }

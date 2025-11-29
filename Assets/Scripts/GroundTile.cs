@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class GroundTile : MonoBehaviour
 {
-    public float tileWidth = 20f;
+    public float tileWidth = 30.09375f;
     public SpikeGenerator generator;
 
     private void Update()
