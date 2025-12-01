@@ -15,6 +15,8 @@ public class MainMenu : MonoBehaviour
     public TMP_Text livescoreTxt;
     public TMP_Text endscoreTxt;
     public TMP_Text gameOverTxt;
+    public Button buttonUP;
+    public Button buttonDOWN;
 
     private void Awake()
     {
@@ -33,6 +35,8 @@ public class MainMenu : MonoBehaviour
             livescoreTxt.gameObject.SetActive(true);
             endscoreTxt.gameObject.SetActive(false);
             gameOverTxt.gameObject.SetActive(false);
+            buttonUP.gameObject.SetActive(true);
+            buttonDOWN.gameObject.SetActive(true);
         }
     }
 
@@ -56,6 +60,8 @@ public class MainMenu : MonoBehaviour
             livescoreTxt.gameObject.SetActive(false);
             endscoreTxt.gameObject.SetActive(true);
             gameOverTxt.gameObject.SetActive(true);
+            buttonUP.gameObject.SetActive(false);
+            buttonDOWN.gameObject.SetActive(false);
         }
     }
 

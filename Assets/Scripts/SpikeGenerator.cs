@@ -6,8 +6,8 @@ public class SpikeGenerator : MonoBehaviour
     public GameObject topSpike;
 
     [Header("Top spike settings")]
-    public float topSpikeY = -6.5f;
-    public float bottomSpikeY = -7.38f;
+    public float topSpikeY = -3f;
+    public float bottomSpikeY = -4f;
     public float chanceForTopSpawn = 0.3f;
 
     [Header("Speed settings")]

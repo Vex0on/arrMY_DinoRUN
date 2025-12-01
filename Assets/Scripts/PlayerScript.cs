@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using System;
 
 public class PlayerScript : MonoBehaviour
 {
@@ -38,23 +37,60 @@ public class PlayerScript : MonoBehaviour
 
     private void Update()
     {
-
         if (!isAlive)
             return;
-        // ----------------- SKOK -----------------
-        if ((Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.UpArrow)) && isGrounded)
+
+        // ----------------- PC (klawiatura) -----------------
+        if (Input.GetKeyDown(KeyCode.UpArrow) && isGrounded)
+            JumpRequested = true;
+
+        if (Input.GetKeyDown(KeyCode.DownArrow) && isGrounded)
+            SlideRequested = true;
+
+        // ----------------- DOTYK + MYSZ (WebGL + mobile + PC) -----------------
+
+        bool inputDown = false;
+        Vector2 inputPos = Vector2.zero;
+
+        // ------------------ Mysz ----------------------
+        if (Input.GetMouseButtonDown(0))
         {
-                JumpRequested = true;
+            inputDown = true;
+            inputPos = Input.mousePosition;
         }
 
-        // ----------------- WŒLIZG -----------------
-        if (Input.GetKeyDown(KeyCode.DownArrow) && isGrounded)
+        // ------------------ Dotyk ---------------------
+        if (Input.touchCount > 0)
         {
-            SlideRequested = true;
+            Touch touch = Input.GetTouch(0);
+
+            if (touch.phase == TouchPhase.Began)
+            {
+                inputDown = true;
+                inputPos = touch.position;
+            }
+        }
+
+        // Podzia³ ekranu góra = skok / dó³ = œlizg
+        if (inputDown)
+        {
+            float halfScreen = Screen.height * 0.5f;
+
+            if (inputPos.y > halfScreen)
+            {
+                if (isGrounded)
+                    JumpRequested = true;
+            }
+            else
+            {
+                if (isGrounded)
+                    SlideRequested = true;
+            }
         }
 
         // ----------------- WYNIK -----------------
         score += Time.deltaTime * scoreMultiplier;
+
         if (Time.time >= nextScoreUpdate)
         {
             ScoreTxt.text = $"SCORE: {score:F0}";
@@ -73,9 +109,7 @@ public class PlayerScript : MonoBehaviour
             isGrounded = false;
 
             if (isSliding)
-            {
                 stopSlide();
-            }
         }
 
         if (SlideRequested)
@@ -87,6 +121,9 @@ public class PlayerScript : MonoBehaviour
 
     private void startSlide()
     {
+        if (!isGrounded)
+            return;
+
         isSliding = true;
         col.size = slideColliderSize;
 
@@ -96,7 +133,8 @@ public class PlayerScript : MonoBehaviour
 
     private void stopSlide()
     {
-        if (!isSliding) return;
+        if (!isSliding)
+            return;
 
         isSliding = false;
         col.size = originalColliderSize;
@@ -104,7 +142,8 @@ public class PlayerScript : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (!isAlive) return;
+        if (!isAlive)
+            return;
 
         if (collision.gameObject.CompareTag("ground"))
         {
@@ -119,14 +158,13 @@ public class PlayerScript : MonoBehaviour
         }
 
         if (collision.gameObject.CompareTag("spike"))
-        {
             Die();
-        }
     }
 
     private void Die()
     {
         isAlive = false;
+
         rb.linearVelocity = Vector2.zero;
         rb.bodyType = RigidbodyType2D.Kinematic;
 
