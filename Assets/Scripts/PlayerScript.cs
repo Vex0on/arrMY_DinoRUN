@@ -129,7 +129,7 @@ public class PlayerScript : MonoBehaviour
         isSliding = true;
         col.size = slideColliderSize;
 
-        //anim.SetBool("isSliding", true);
+        anim.SetBool("isSliding", true);
 
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, -4f);
         Invoke(nameof(stopSlide), slideDuration);
@@ -142,7 +142,7 @@ public class PlayerScript : MonoBehaviour
 
         isSliding = false;
         col.size = originalColliderSize;
-        //anim.SetBool("isSliding", false);
+        anim.SetBool("isSliding", false);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -177,5 +177,9 @@ public class PlayerScript : MonoBehaviour
 
         MainMenu.Instance?.ShowTryAgain();
         MainMenu.Instance?.ShowFinalScore(score);
+
+#if UNITY_WEBGL && !UNITY_EDITOR
+    Application.ExternalCall("SetUnityScore", (int)score);
+#endif
     }
 }
