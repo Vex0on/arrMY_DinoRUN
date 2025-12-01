@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 73f086a5676253e42a98dcf8e0e3b17e
+guid: 6280b4790b736fc4a92a584eacc5e385
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1981308119413597516
-    second: blok_0
+      213: -5163931741586414079
+    second: ROBOTKUC_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,12 +46,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 64
+  spritePixelsToUnits: 28
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -77,7 +77,7 @@ TextureImporter:
     textureFormat: -1
     textureCompression: 1
     compressionQuality: 50
-    crunchedCompression: 0
+    crunchedCompression: 1
     allowsAlphaSplitting: 0
     overridden: 0
     ignorePlatformSupport: 0
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: blok_0
+      name: ROBOTKUC_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 4
         y: 0
-        width: 64
-        height: 58
+        width: 40
+        height: 50
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4ba51c743caf084e0800000000000000
-      internalID: -1981308119413597516
+      spriteID: 106a062d0770658b0800000000000000
+      internalID: -5163931741586414079
       vertices: []
       indices: 
       edges: []
@@ -138,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      blok_0: -1981308119413597516
+      ROBOTKUC_0: -5163931741586414079
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -25,14 +25,16 @@ public class PlayerScript : MonoBehaviour
     private CapsuleCollider2D col;
     private Vector2 originalColliderSize;
     private Vector2 slideColliderSize;
+    private Animator anim;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         col = rb.GetComponent<CapsuleCollider2D>();
+        anim = GetComponent<Animator>();
 
         originalColliderSize = col.size;
-        slideColliderSize = new Vector2(col.size.x, col.size.y * 0.45f);
+        slideColliderSize = new Vector2(col.size.x, col.size.y * 0.65f);
     }
 
     private void Update()
@@ -47,7 +49,7 @@ public class PlayerScript : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.DownArrow) && isGrounded)
             SlideRequested = true;
 
-        // ----------------- DOTYK + MYSZ (WebGL + mobile + PC) -----------------
+        // ----------------- DOTYK + MYSZ -----------------
 
         bool inputDown = false;
         Vector2 inputPos = Vector2.zero;
@@ -71,7 +73,7 @@ public class PlayerScript : MonoBehaviour
             }
         }
 
-        // Podzia³ ekranu góra = skok / dó³ = œlizg
+        // --------------- Podzia³ ekranu ----------------
         if (inputDown)
         {
             float halfScreen = Screen.height * 0.5f;
@@ -127,6 +129,8 @@ public class PlayerScript : MonoBehaviour
         isSliding = true;
         col.size = slideColliderSize;
 
+        //anim.SetBool("isSliding", true);
+
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, -4f);
         Invoke(nameof(stopSlide), slideDuration);
     }
@@ -138,6 +142,7 @@ public class PlayerScript : MonoBehaviour
 
         isSliding = false;
         col.size = originalColliderSize;
+        //anim.SetBool("isSliding", false);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

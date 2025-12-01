@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3851704098444197979
+--- !u!1 &723737270545883445
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,11 +8,12 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 9050894219765123650}
-  - component: {fileID: 4710245610738129669}
-  - component: {fileID: 8412271943803215500}
-  - component: {fileID: 8409693999010589186}
-  - component: {fileID: 4601932961511486636}
+  - component: {fileID: 7347636038790137764}
+  - component: {fileID: 7885972028268776917}
+  - component: {fileID: 620788668338095697}
+  - component: {fileID: 5887997105776209901}
+  - component: {fileID: 1967995601747359588}
+  - component: {fileID: 5371355630526337799}
   m_Layer: 0
   m_Name: Bird
   m_TagString: spike
@@ -20,28 +21,28 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &9050894219765123650
+--- !u!4 &7347636038790137764
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3851704098444197979}
+  m_GameObject: {fileID: 723737270545883445}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.741807, y: -6.3118114, z: 0}
+  m_LocalPosition: {x: -3.629746, y: -3.0773077, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &4710245610738129669
+--- !u!212 &7885972028268776917
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3851704098444197979}
+  m_GameObject: {fileID: 723737270545883445}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -90,14 +91,14 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!50 &8412271943803215500
+--- !u!50 &620788668338095697
 Rigidbody2D:
   serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3851704098444197979}
+  m_GameObject: {fileID: 723737270545883445}
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
@@ -117,26 +118,26 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 6
---- !u!114 &8409693999010589186
+--- !u!114 &5887997105776209901
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3851704098444197979}
+  m_GameObject: {fileID: 723737270545883445}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 69a6c7705d41a5047985e143506b5370, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   spikeGenerator: {fileID: 0}
---- !u!60 &4601932961511486636
+--- !u!60 &1967995601747359588
 PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3851704098444197979}
+  m_GameObject: {fileID: 723737270545883445}
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
@@ -191,3 +192,25 @@ PolygonCollider2D:
       - {x: 0.19441879, y: 0.146492}
       - {x: 0.13414085, y: 0.39357328}
   m_UseDelaunayMesh: 0
+--- !u!95 &5371355630526337799
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 723737270545883445}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 97915ead56caef54d9045a6244500efc, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
