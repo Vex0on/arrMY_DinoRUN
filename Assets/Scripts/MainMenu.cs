@@ -1,4 +1,5 @@
 using JetBrains.Annotations;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -11,6 +12,9 @@ public class MainMenu : MonoBehaviour
     public Button startButton;
     public Button tryAgainButton;
     public Image endScreenImage;
+    public TMP_Text livescoreTxt;
+    public TMP_Text endscoreTxt;
+    public TMP_Text gameOverTxt;
 
     private void Awake()
     {
@@ -26,6 +30,9 @@ public class MainMenu : MonoBehaviour
         {
             tryAgainButton.gameObject.SetActive(false);
             endScreenImage.gameObject.SetActive(false);
+            livescoreTxt.gameObject.SetActive(true);
+            endscoreTxt.gameObject.SetActive(false);
+            gameOverTxt.gameObject.SetActive(false);
         }
     }
 
@@ -46,6 +53,14 @@ public class MainMenu : MonoBehaviour
         {
             tryAgainButton.gameObject.SetActive(true);
             endScreenImage.gameObject.SetActive(true);
+            livescoreTxt.gameObject.SetActive(false);
+            endscoreTxt.gameObject.SetActive(true);
+            gameOverTxt.gameObject.SetActive(true);
         }
+    }
+
+    public void ShowFinalScore(float score)
+    {
+        endscoreTxt.text = $"GRATULACJE! TWÓJ WYNIK: {score:F0} PKT";
     }
 }

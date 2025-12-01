@@ -167,6 +167,7 @@ MonoBehaviour:
   startButton: {fileID: 335295715}
   tryAgainButton: {fileID: 0}
   endScreenImage: {fileID: 0}
+  scoreTxt: {fileID: 0}
 --- !u!1 &335295713
 GameObject:
   m_ObjectHideFlags: 0

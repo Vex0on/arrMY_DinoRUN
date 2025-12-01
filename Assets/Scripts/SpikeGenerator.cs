@@ -2,7 +2,13 @@ using UnityEngine;
 
 public class SpikeGenerator : MonoBehaviour
 {
-    public GameObject spike;
+    public GameObject bottomSpike;
+    public GameObject topSpike;
+
+    [Header("Top spike settings")]
+    public float topSpikeY = -6.5f;
+    public float bottomSpikeY = -7.38f;
+    public float chanceForTopSpawn = 0.3f;
 
     [Header("Speed settings")]
 
@@ -42,7 +48,14 @@ public class SpikeGenerator : MonoBehaviour
 
     private void SpawnSpike()
     {
-        GameObject SpikeIns = Instantiate(spike, transform.position, transform.rotation);
+        bool spawnTop = Random.value < chanceForTopSpawn;
+
+        GameObject prefab = spawnTop ? topSpike : bottomSpike;
+        
+        Vector3 pos = transform.position;
+        pos.y = spawnTop ? topSpikeY : bottomSpikeY;
+
+        GameObject SpikeIns = Instantiate(prefab, pos, Quaternion.identity);
         SpikeIns.GetComponent<SpikeScript>().spikeGenerator = this;
     }
 }
