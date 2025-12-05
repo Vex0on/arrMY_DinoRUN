@@ -2,18 +2,21 @@ using UnityEngine;
 
 public class SpikeScript : MonoBehaviour
 {
-    public SpikeGenerator spikeGenerator;
+    private SpikeGenerator generator;
 
-    void Update()
+    public void Initialize(SpikeGenerator gen)
     {
-        transform.Translate(Vector2.left * spikeGenerator.currentSpeed * Time.deltaTime);
+        generator = gen;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void Update()
     {
-        if (collision.gameObject.CompareTag("Finish"))
-        {
+        transform.Translate(Vector2.left * generator.currentSpeed * Time.deltaTime);
+    }
+
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.CompareTag("Finish"))
             Destroy(gameObject);
-        }
     }
 }

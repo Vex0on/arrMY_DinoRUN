@@ -4711,7 +4711,7 @@ Transform:
   m_GameObject: {fileID: 3058493987509675950}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 15.900002, y: -3.94, z: 0}
+  m_LocalPosition: {x: 17.24, y: -3.94, z: 0}
   m_LocalScale: {x: 0.3788, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4802,17 +4802,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b30bfb1ce9163dd4bb42508355c5b9ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bottomSpike: {fileID: 5283998841086565427, guid: cfcd0aa7650d10642907488cbd301f21, type: 3}
-  topSpike: {fileID: 723737270545883445, guid: 11a9f3f12c9cfbc42885d2037321f62c, type: 3}
+  bottomSpikePrefab: {fileID: 3750748901727784859, guid: cfcd0aa7650d10642907488cbd301f21, type: 3}
+  topSpikePrefab: {fileID: 5887997105776209901, guid: 11a9f3f12c9cfbc42885d2037321f62c, type: 3}
   topSpikeY: -3
   bottomSpikeY: -4
   chanceForTopSpawn: 0.3
-  MinSpeed: 5
-  MaxSpeed: 20
-  currentSpeed: 0
-  SpeedMultiplier: 0.15
-  MinGap: 0.8
-  MaxGap: 2.2
+  minSpeed: 5
+  maxSpeed: 18
+  speedMultiplier: 0.12
+  minDistance: 5
+  maxDistance: 13
+  randomOffset: 0.8
+  baseMinSafeDistance: 6
+  maxMinSafeDistance: 10
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

@@ -2,60 +2,79 @@ using UnityEngine;
 
 public class SpikeGenerator : MonoBehaviour
 {
-    public GameObject bottomSpike;
-    public GameObject topSpike;
+    [Header("Spike Prefabs")]
+    [SerializeField] private SpikeScript bottomSpikePrefab;
+    [SerializeField] private SpikeScript topSpikePrefab;
 
-    [Header("Top spike settings")]
-    public float topSpikeY = -3f;
-    public float bottomSpikeY = -4f;
-    public float chanceForTopSpawn = 0.3f;
+    [Header("Spike Settings")]
+    [SerializeField] private float topSpikeY = -3f;
+    [SerializeField] private float bottomSpikeY = -4f;
+    [SerializeField] private float chanceForTopSpawn = 0.3f;
 
-    [Header("Speed settings")]
+    [Header("Speed Settings")]
+    [SerializeField] private float minSpeed = 5f;
+    [SerializeField] private float maxSpeed = 18f;
+    [SerializeField] private float speedMultiplier = 0.12f;
+    public float currentSpeed { get; private set; }
 
-    public float MinSpeed = 5f;
-    public float MaxSpeed = 18f;
-    public float currentSpeed;
-    public float SpeedMultiplier = 0.15f;
+    [Header("Distance Settings")]
+    [SerializeField] private float minDistance = 5f;
+    [SerializeField] private float maxDistance = 13f;
+    [SerializeField] private float randomOffset = 0.8f;
 
-    [Header("Spacing")]
-    public float MinGap = 0.8f;
-    public float MaxGap = 2.2f;
+    [SerializeField] private float baseMinSafeDistance = 6f;
+    [SerializeField] private float maxMinSafeDistance = 10f;
 
-    private float nextSpawnTime;
+    private float distanceCounter;
+    private float targetDistance;
 
-    void Awake()
+    private void Awake()
     {
-        currentSpeed = MinSpeed;
-        ScheduleNextSpike();
+        currentSpeed = minSpeed;
+        SetNextTargetDistance();
     }
 
-    void Update()
+    private void Update()
     {
-        if (currentSpeed < MaxSpeed)
-            currentSpeed += SpeedMultiplier * Time.deltaTime;
+        if (currentSpeed < maxSpeed)
+            currentSpeed += speedMultiplier * Time.deltaTime;
 
-        if (Time.time >= nextSpawnTime)
+        distanceCounter += currentSpeed * Time.deltaTime;
+
+        if (distanceCounter >= targetDistance)
         {
             SpawnSpike();
-            ScheduleNextSpike();
+            SetNextTargetDistance();
+            distanceCounter = 0f;
         }
-    }
-
-    private void ScheduleNextSpike()
-    {
-        nextSpawnTime = Time.time + Random.Range(MinGap, MaxGap);
     }
 
     private void SpawnSpike()
     {
-        bool spawnTop = Random.value < chanceForTopSpawn;
+        bool top = Random.value < chanceForTopSpawn;
 
-        GameObject prefab = spawnTop ? topSpike : bottomSpike;
-        
+        SpikeScript prefab = top ? topSpikePrefab : bottomSpikePrefab;
+
         Vector3 pos = transform.position;
-        pos.y = spawnTop ? topSpikeY : bottomSpikeY;
+        pos.y = top ? topSpikeY : bottomSpikeY;
 
-        GameObject SpikeIns = Instantiate(prefab, pos, Quaternion.identity);
-        SpikeIns.GetComponent<SpikeScript>().spikeGenerator = this;
+        SpikeScript spike = Instantiate(prefab, pos, Quaternion.identity);
+        spike.Initialize(this);
+    }
+
+    private void SetNextTargetDistance()
+    {
+        float speedT = currentSpeed / maxSpeed;
+
+        float baseDist = Mathf.Lerp(maxDistance, minDistance, speedT);
+
+        float adjustedRandom = Mathf.Lerp(randomOffset, randomOffset * 0.35f, speedT);
+        float offset = Random.Range(-adjustedRandom, adjustedRandom);
+
+        float dist = baseDist + offset;
+
+        float minSafeDistance = Mathf.Lerp(baseMinSafeDistance, maxMinSafeDistance, speedT);
+
+        targetDistance = Mathf.Max(minSafeDistance, dist);
     }
 }
